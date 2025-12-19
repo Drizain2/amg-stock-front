@@ -1,0 +1,193 @@
+frontend/
+├── public/
+│   ├── favicon.ico
+│   └── index.html
+│
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── styles/
+│   │       ├── main.css
+│   │       ├── variables.css
+│   │       └── tailwind.css
+│   │
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── AppButton.vue
+│   │   │   ├── AppInput.vue
+│   │   │   ├── AppModal.vue
+│   │   │   ├── AppTable.vue
+│   │   │   ├── AppPagination.vue
+│   │   │   ├── AppCard.vue
+│   │   │   ├── AppBadge.vue
+│   │   │   ├── AppSpinner.vue
+│   │   │   └── AppAlert.vue
+│   │   │
+│   │   ├── layout/
+│   │   │   ├── AppHeader.vue
+│   │   │   ├── AppSidebar.vue
+│   │   │   ├── AppFooter.vue
+│   │   │   └── AppBreadcrumb.vue
+│   │   │
+│   │   ├── auth/
+│   │   │   ├── LoginForm.vue
+│   │   │   └── RegisterForm.vue
+│   │   │
+│   │   ├── companies/
+│   │   │   ├── CompanyCard.vue
+│   │   │   ├── CompanyForm.vue
+│   │   │   ├── CompanyList.vue
+│   │   │   └── CompanyFilters.vue
+│   │   │
+│   │   ├── branches/
+│   │   │   ├── BranchCard.vue
+│   │   │   ├── BranchForm.vue
+│   │   │   ├── BranchList.vue
+│   │   │   └── BranchFilters.vue
+│   │   │
+│   │   ├── products/
+│   │   │   ├── ProductCard.vue
+│   │   │   ├── ProductForm.vue
+│   │   │   ├── ProductList.vue
+│   │   │   ├── ProductFilters.vue
+│   │   │   └── ProductDetails.vue
+│   │   │
+│   │   └── stocks/
+│   │       ├── StockCard.vue
+│   │       ├── StockAdjustmentForm.vue
+│   │       ├── StockTransferForm.vue
+│   │       ├── StockMovementList.vue
+│   │       ├── LowStockAlert.vue
+│   │       └── StockChart.vue
+│   │
+│   ├── composables/
+│   │   ├── useAuth.ts
+│   │   ├── useApi.ts
+│   │   ├── usePagination.ts
+│   │   ├── useFilters.ts
+│   │   ├── useModal.ts
+│   │   ├── useToast.ts
+│   │   └── usePermissions.ts
+│   │
+│   ├── layouts/
+│   │   ├── AuthLayout.vue
+│   │   ├── DashboardLayout.vue
+│   │   └── EmptyLayout.vue
+│   │
+│   ├── router/
+│   │   ├── index.ts
+│   │   ├── routes/
+│   │   │   ├── auth.routes.ts
+│   │   │   ├── dashboard.routes.ts
+│   │   │   ├── companies.routes.ts
+│   │   │   ├── branches.routes.ts
+│   │   │   ├── products.routes.ts
+│   │   │   └── stocks.routes.ts
+│   │   └── guards/
+│   │       ├── auth.guard.ts
+│   │       └── role.guard.ts
+│   │
+│   ├── stores/
+│   │   ├── auth.store.ts
+│   │   ├── company.store.ts
+│   │   ├── branch.store.ts
+│   │   ├── product.store.ts
+│   │   ├── stock.store.ts
+│   │   ├── role.store.ts
+│   │   └── ui.store.ts
+│   │
+│   ├── services/
+│   │   ├── api/
+│   │   │   ├── axios.config.ts
+│   │   │   ├── auth.service.ts
+│   │   │   ├── company.service.ts
+│   │   │   ├── branch.service.ts
+│   │   │   ├── product.service.ts
+│   │   │   ├── stock.service.ts
+│   │   │   └── role.service.ts
+│   │   │
+│   │   ├── storage/
+│   │   │   └── localStorage.service.ts
+│   │   │
+│   │   └── utils/
+│   │       ├── date.service.ts
+│   │       ├── format.service.ts
+│   │       └── validation.service.ts
+│   │
+│   ├── types/
+│   │   ├── models/
+│   │   │   ├── User.ts
+│   │   │   ├── Role.ts
+│   │   │   ├── Company.ts
+│   │   │   ├── Branch.ts
+│   │   │   ├── Product.ts
+│   │   │   ├── Stock.ts
+│   │   │   ├── StockMovement.ts
+│   │   │   └── Category.ts
+│   │   │
+│   │   ├── api/
+│   │   │   ├── requests.ts
+│   │   │   ├── responses.ts
+│   │   │   └── errors.ts
+│   │   │
+│   │   └── common/
+│   │       ├── pagination.ts
+│   │       ├── filters.ts
+│   │       └── enums.ts
+│   │
+│   ├── utils/
+│   │   ├── constants.ts
+│   │   ├── helpers.ts
+│   │   ├── validators.ts
+│   │   └── formatters.ts
+│   │
+│   ├── views/
+│   │   ├── auth/
+│   │   │   ├── LoginView.vue
+│   │   │   └── RegisterView.vue
+│   │   │
+│   │   ├── dashboard/
+│   │   │   └── DashboardView.vue
+│   │   │
+│   │   ├── companies/
+│   │   │   ├── CompaniesView.vue
+│   │   │   ├── CompanyDetailsView.vue
+│   │   │   └── CompanyFormView.vue
+│   │   │
+│   │   ├── branches/
+│   │   │   ├── BranchesView.vue
+│   │   │   ├── BranchDetailsView.vue
+│   │   │   └── BranchFormView.vue
+│   │   │
+│   │   ├── products/
+│   │   │   ├── ProductsView.vue
+│   │   │   ├── ProductDetailsView.vue
+│   │   │   └── ProductFormView.vue
+│   │   │
+│   │   ├── stocks/
+│   │   │   ├── StocksView.vue
+│   │   │   ├── StockMovementsView.vue
+│   │   │   ├── StockAdjustmentView.vue
+│   │   │   ├── StockTransferView.vue
+│   │   │   └── LowStockView.vue
+│   │   │
+│   │   └── errors/
+│   │       ├── NotFoundView.vue
+│   │       ├── ForbiddenView.vue
+│   │       └── ServerErrorView.vue
+│   │
+│   ├── App.vue
+│   ├── main.ts
+│   └── vite-env.d.ts
+│
+├── .env.development
+├── .env.production
+├── .gitignore
+├── .eslintrc.cjs
+├── .prettierrc.json
+├── index.html
+├── package.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
