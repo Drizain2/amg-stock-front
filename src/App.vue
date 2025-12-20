@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import AppHeader from './components/layout/AppHeader.vue';
+import { onMounted } from 'vue'
 
 onMounted(() => {
   console.log('App mounted')

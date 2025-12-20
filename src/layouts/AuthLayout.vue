@@ -30,11 +30,6 @@ const pageTitle = computed(()=>{
         <!-- COntenu de la page -->
         <RouterView />
       </div>
-
-      <!-- Footer -->
-      <!-- <div class="text-center mt-6 text-sm text-secondary">
-        <p>&.copy; {{ new Date().getFullYear() }} Stock Management. Tous droits reservés</p>
-      </div> -->
       <AppFooter />
     </div>
   </div>

@@ -5,7 +5,7 @@ const currentYear = new Date().getFullYear()
   <footer class="mt-auto py-4 border-t border-gray-200 bg-white">
     <div class="flex items-center justify-between">
       <p class="text-sm text-gray-600">
-         <p class="text-center mt-8 text-xs text-gray-500">
+        <p class="text-center mt-8 text-xs text-gray-500">
         © {{currentYear}} StockMaster Pro. Tous droits réservés.
       </p>
       </p>
