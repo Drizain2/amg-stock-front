@@ -42,17 +42,17 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
 </script>
 
 <template>
-  <nav class="breadcrumb">
-    <ol class="breadcrumb-list">
+  <nav class="mb-4">
+    <ol class="flex items-center flex-wrap gap-2">
       <li
         v-for="(item, index) in breadcrumbs"
         :key="index"
-        class="breadcrumb-item"
+        class="flex items-center gap-2"
       >
         <!-- Separator -->
         <svg
           v-if="index > 0"
-          class="breadcrumb-separator"
+          class="w-5 h-5 text-gray-400"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -67,40 +67,14 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => {
         <RouterLink
           v-if="item.path"
           :to="item.path"
-          class="breadcrumb-link"
+          class="text-sm text-gray-600 hover:text-primary-600 transition-colors"
         >
           {{ item.label }}
         </RouterLink>
-        <span v-else class="breadcrumb-current">
+        <span v-else class="text-sm text-gray-900 font-medium">
           {{ item.label }}
         </span>
       </li>
     </ol>
   </nav>
 </template>
-
-<style scoped>
-.breadcrumb {
-  @apply mb-4;
-}
-
-.breadcrumb-list {
-  @apply flex items-center flex-wrap gap-2;
-}
-
-.breadcrumb-item {
-  @apply flex items-center gap-2;
-}
-
-.breadcrumb-separator {
-  @apply w-5 h-5 text-gray-400;
-}
-
-.breadcrumb-link {
-  @apply text-sm text-gray-600 hover:text-primary-600 transition-colors;
-}
-
-.breadcrumb-current {
-  @apply text-sm text-gray-900 font-medium;
-}
-</style>

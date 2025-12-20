@@ -11,8 +11,8 @@ const apiClient: AxiosInstance = axios.create({
     timeout: 30000,
     headers: {
         'Content-Type': "application/json",
-        Accept: "application/json"
-    }
+        Accept: "application/json",
+    },    
 })
 
 // Intercepteur de requête - Ajouter le token

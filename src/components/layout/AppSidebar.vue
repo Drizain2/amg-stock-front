@@ -64,12 +64,12 @@ const isActive = (path: string) => {
 <template>
   <aside
     :class="[
-      'sidebar',
-      collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'
+      'fixed left-0 top-16 bottom-0 bg-white border-r border-gray-200 transition-all duration-300 z-30 flex flex-col',
+      collapsed ? 'w-16' : 'w-64'
     ]"
   >
     <!-- User info -->
-    <div v-if="!collapsed" class="sidebar-user">
+    <div v-if="!collapsed" class="p-4 border-b border-gray-200">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-semibold">
           {{ user?.first_name?.[0] }}{{ user?.last_name?.[0] }}
@@ -86,74 +86,31 @@ const isActive = (path: string) => {
     </div>
 
     <!-- Navigation -->
-    <nav class="sidebar-nav">
+    <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
       <RouterLink
         v-for="item in menuItems.filter(i => i.permission)"
         :key="item.path"
         :to="item.path"
         :class="[
-          'nav-item',
-          isActive(item.path) ? 'nav-item-active' : 'nav-item-inactive'
+          'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
+          isActive(item.path) ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:bg-gray-100'
         ]"
         :title="collapsed ? item.title : undefined"
       >
-        <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="item.icon" />
         </svg>
-        <span v-if="!collapsed" class="nav-item-text">
+        <span v-if="!collapsed" class="text-sm font-medium">
           {{ item.title }}
         </span>
       </RouterLink>
     </nav>
 
     <!-- Footer -->
-    <div v-if="!collapsed" class="sidebar-footer">
+    <div v-if="!collapsed" class="p-4 border-t border-gray-200">
       <p class="text-xs text-gray-500 text-center">
         © 2024 Stock Management
       </p>
     </div>
   </aside>
 </template>
-
-<style scoped>
-.sidebar {
-  @apply fixed left-0 top-16 bottom-0 bg-white border-r border-gray-200 transition-all duration-300 z-30;
-  @apply flex flex-col;
-}
-
-.sidebar-expanded {
-  @apply w-64;
-}
-
-.sidebar-collapsed {
-  @apply w-16;
-}
-
-.sidebar-user {
-  @apply p-4 border-b border-gray-200;
-}
-
-.sidebar-nav {
-  @apply flex-1 overflow-y-auto py-4 px-3 space-y-1;
-}
-
-.nav-item {
-  @apply flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors;
-}
-
-.nav-item-active {
-  @apply bg-primary-50 text-primary-700;
-}
-
-.nav-item-inactive {
-  @apply text-gray-700 hover:bg-gray-100;
-}
-
-.nav-item-text {
-  @apply text-sm font-medium;
-}
-
-.sidebar-footer {
-  @apply p-4 border-t border-gray-200;
-}
-</style>
