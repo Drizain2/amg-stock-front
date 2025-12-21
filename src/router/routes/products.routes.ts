@@ -8,22 +8,22 @@ const productRoutes : RouteRecordRaw[]=[
         meta:{
             requiresAuth: true,
         },
-        // children:[
-        //     {
-        //         path:"",
-        //         name:"ProductList",
-        //         component:()=> import ("@views/products/ProductView.vue"),
-        //         meta:{
-        //             title:"Produits",
-        //             requiresAuth:true,
-        //             roles:[
-        //                 UserRole.SUPER_ADMIN,
-        //                 UserRole.COMPANY_ADMIN,
-        //                 UserRole.BRANCH_MANAGER,
-        //                 UserRole.EMPLOYEE,
-        //             ]
-        //         }
-        //     },
+        children:[
+            {
+                path:"",
+                name:"ProductList",
+                component:()=> import ("@views/products/ProductsView.vue"),
+                meta:{
+                    title:"Produits",
+                    requiresAuth:true,
+                    roles:[
+                        UserRole.SUPER_ADMIN,
+                        UserRole.COMPANY_ADMIN,
+                        UserRole.BRANCH_MANAGER,
+                        UserRole.EMPLOYEE,
+                    ]
+                }
+            },
         //     {
         //         path:'create',
         //         name:'ProductCreate',
@@ -67,7 +67,7 @@ const productRoutes : RouteRecordRaw[]=[
         //             ]
         //         }
         //     }
-        // ]
+        ]
     }
 ]
 

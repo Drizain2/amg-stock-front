@@ -113,7 +113,7 @@ const handleRegister = async () => {
     return
   }
 
-  const success = await submit(async (formValues) => {
+  await submit(async (formValues) => {
     try {
       const registerData: RegisterRequest = {
         email: formValues.email,

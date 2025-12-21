@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AppInput from '@components/common/AppInput.vue'
 import AppButton from '@components/common/AppButton.vue'
@@ -41,7 +41,7 @@ const generalError = ref<string | null>(null)
 const handleLogin = async () => {
   generalError.value = null
 
-  const success = await submit(async (formValues) => {
+  await submit(async (formValues) => {
     try {
       await authStore.login(formValues)
       emit('success')

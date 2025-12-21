@@ -108,7 +108,7 @@ const hasPrevious = computed(() => props.currentPage > 1)
         :disabled="page === '...'"
         :class="[
           'pagination-btn',
-          page === currentPage ? 'pagination-btn-active' : 'hover:bg-gray-100',
+          page === currentPage ? 'bg-primary-600 text-white border-primary-600' : 'hover:bg-gray-100',
           page === '...' ? 'cursor-default' : '',
         ]"
         @click="typeof page === 'number' && goToPage(page)"
@@ -140,8 +140,3 @@ const hasPrevious = computed(() => props.currentPage > 1)
   </div>
 </template>
 
-<style scoped>
-.pagination-btn-active {
-  @apply bg-primary-600 text-white border-primary-600;
-}
-</style>

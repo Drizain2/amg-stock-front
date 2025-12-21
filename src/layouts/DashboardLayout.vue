@@ -35,7 +35,6 @@ const toggleSidebar = () => {
 
                 <!-- Page Content -->
                 <div class="animate-fade-in min-h-screen">
-                    <p>Bienvenue ici</p>
                     <RouterView />
                 </div>
             </div>
