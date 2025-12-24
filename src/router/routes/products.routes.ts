@@ -24,49 +24,49 @@ const productRoutes : RouteRecordRaw[]=[
                     ]
                 }
             },
-        //     {
-        //         path:'create',
-        //         name:'ProductCreate',
-        //         component:()=>import("@views/products/ProductFormView.vue"),
-        //         meta:{
-        //             title:'Créer un produit',
-        //             requiresAuth:true,
-        //             roles:[
-        //                 UserRole.SUPER_ADMIN,
-        //                 UserRole.COMPANY_ADMIN,
-        //                 UserRole.BRANCH_MANAGER,
-        //             ]
-        //         }
-        //     },
-        //     {
-        //         path:':id',
-        //         name:'ProductDetails',
-        //         component:()=>import("@views/products/ProductDetailsView.vue"),
-        //         meta:{
-        //             title:"Details du produit",
-        //             requiresAuth:true,
-        //             roles:[
-        //                 UserRole.SUPER_ADMIN,
-        //                 UserRole.COMPANY_ADMIN,
-        //                 UserRole.BRANCH_MANAGER,
-        //                 UserRole.EMPLOYEE,
-        //             ]
-        //         }
-        //     },
-        //     {
-        //         path:':id/edit',
-        //         name:'ProductDetails',
-        //         component:()=>import("@views/products/ProductFormView.vue"),
-        //         meta:{
-        //             title:"Modifier le produit",
-        //             requiresAuth:true,
-        //             roles:[
-        //                 UserRole.SUPER_ADMIN,
-        //                 UserRole.COMPANY_ADMIN,
-        //                 UserRole.BRANCH_MANAGER,
-        //             ]
-        //         }
-        //     }
+            {
+                path:'create',
+                name:'ProductCreate',
+                component:()=>import("@views/products/ProductFormView.vue"),
+                meta:{
+                    title:'Créer un produit',
+                    requiresAuth:true,
+                    roles:[
+                        UserRole.SUPER_ADMIN,
+                        UserRole.COMPANY_ADMIN,
+                        UserRole.BRANCH_MANAGER,
+                    ]
+                }
+            },
+            {
+                path:':id',
+                name:'ProductDetails',
+                component:()=>import("@views/products/ProductDetailsView.vue"),
+                meta:{
+                    title:"Details du produit",
+                    requiresAuth:true,
+                    roles:[
+                        UserRole.SUPER_ADMIN,
+                        UserRole.COMPANY_ADMIN,
+                        UserRole.BRANCH_MANAGER,
+                        UserRole.EMPLOYEE,
+                    ]
+                }
+            },
+            {
+                path:':id/edit',
+                name:'ProductEdit',
+                component:()=>import("@views/products/ProductFormView.vue"),
+                meta:{
+                    title:"Modifier le produit",
+                    requiresAuth:true,
+                    roles:[
+                        UserRole.SUPER_ADMIN,
+                        UserRole.COMPANY_ADMIN,
+                        UserRole.BRANCH_MANAGER,
+                    ]
+                }
+            }
         ]
     }
 ]

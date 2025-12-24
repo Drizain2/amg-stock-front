@@ -14,6 +14,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { Upload, Plus, Grid, List, Package, Filter, Download } from 'lucide-vue-next'
 import ProductCard from '@/components/products/ProductCard.vue'
+import AppModal from '@/components/common/AppModal.vue'
 
 const router = useRouter()
 const productStore = useProductStore()
@@ -142,7 +143,10 @@ const goToDetail = (products: Product) => {
 const goToEdit = (products: Product) => {
   router.push({ name: 'ProductEdit', params: { id: products.id } })
 }
-
+const isOpen =ref(false)
+const handleOpen = () => {
+  isOpen.value = !isOpen.value
+}
 const handleDelete = async (products: Product) => {
   if (confirm(`Êtes vous sûr de vouloir supprimer ${products.name} ?`)) {
     try {
@@ -514,9 +518,9 @@ onMounted(() => {
           </template>
         </AppTable>
       </div>
-      <div v-if="viewMode ==='grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div v-if="viewMode ==='grid'" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
         <div v-for="value in products">
-            <ProductCard :product="value"  :selectable="true"/>
+            <ProductCard :product="value" :key="value.id"   :selectable="true"/>
         </div>
       </div>
     </AppCard>
@@ -530,4 +534,20 @@ onMounted(() => {
       @update:current-page="handlePageChange"
     />
   </div>
+
+  <AppModal v-model="isOpen" title="Créer un produit" size="lg">
+  <form>
+    <!-- Formulaire -->
+  </form>
+  
+  
+  <template #footer>
+    <AppButton variant="outline" @click="isOpen = false">
+      Annuler
+    </AppButton>
+    <AppButton variant="primary">
+      Créer
+    </AppButton>
+  </template>
+</AppModal>
 </template>

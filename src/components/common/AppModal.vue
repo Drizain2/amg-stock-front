@@ -61,14 +61,15 @@ onUnmounted(() => {
       >
         <!-- Overlay -->
         <div
-          class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+          class="fixed inset-0 bg-black/30 bg-opacity-50 transition-opacity backdrop-blur-sm"
           @click="handleOverlayClick"
+          aria-hidden="true"
         ></div>
 
         <!-- Modal -->
         <div class="flex min-h-screen items-center justify-center p-4">
           <div
-            :class="['relative bg-white rounded-lg shadow-xl w-full', sizeClasses[size]]"
+            :class="['relative bg-white/80 backdrop-blur-xl border border-white/20 rounded-lg shadow-2xl w-full', sizeClasses[size]]"
             @click.stop
           >
             <!-- Header -->
@@ -82,12 +83,12 @@ onUnmounted(() => {
                 </h3>
               </slot>
 
-              <button v-if="showClose" type="button" class="modal-close" @click="close">
+              <button v-if="showClose" type="button" class="text-gray-400 hover:text-gray-600 transition-colors;" @click="close">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.58614.293-4.293a1 1 0 111.414 1.414L11.414 1014.293 4.293a1 1 01-1.414 1.414L10 11.414.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.29305.707a1 1 0 010-1.414z"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   />
                 </svg>
               </button>
