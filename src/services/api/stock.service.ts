@@ -61,7 +61,8 @@ class StockService {
      */
     async getLowStock(branchId?: number): Promise<Stock[]> {
         const querySting = branchId ? `?branch_id=${branchId}` : ""
-        const { data } = await apiClient.get<LowStockResponse>(`${this.basePath}/low-stocks${querySting}`)
+        console.log('query',querySting)
+        const { data } = await apiClient.get<LowStockResponse>(`${this.basePath}/low-stock${querySting}`)
         return data.stocks
     }
 }

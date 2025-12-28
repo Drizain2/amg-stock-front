@@ -129,7 +129,7 @@ onMounted(() => {
 <template>
   <div v-if="loading" class="flex items-center justify-center h-96">
     <!-- <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div> -->
-     <AppSpinner text="Chargement..." color="text-primary-600"/>
+     <AppSpinner text="Chargement..." color=" primary-600"/>
   </div>
 
   <div v-else-if="product" class="space-y-6">
@@ -226,7 +226,7 @@ onMounted(() => {
           <div class="space-y-4">
             <!-- Image & Basic Info -->
             <div class="flex gap-6">
-              <div class="w-32 h-32 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+              <div class="w-32 h-32 rounded-lg overflow-hidden bg-gray-100 shrink-0">
                 <img
                   v-if="product.image"
                   :src="product.image"
@@ -282,7 +282,7 @@ onMounted(() => {
 
               <div>
                 <label class="text-sm font-medium text-gray-600">Créé le</label>
-                <p class="text-gray-900">{{ formatDate(product.created_at) }}</p>
+                <p class="text-gray-900">{{ product.created_at }}</p>
               </div>
             </div>
           </div>
