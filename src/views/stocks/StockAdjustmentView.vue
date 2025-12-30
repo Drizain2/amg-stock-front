@@ -11,7 +11,7 @@ import AppButton from '@components/common/AppButton.vue'
 import AppCard from '@components/common/AppCard.vue'
 import AppAlert from '@components/common/AppAlert.vue'
 import AppBadge from '@components/common/AppBadge.vue'
-import { ArrowLeft, Save, X, Plus, Minus, Package } from 'lucide-vue-next'
+import { ArrowLeft, Save, X, Plus, Minus, Package,AlertTriangle } from 'lucide-vue-next'
 
 const router = useRouter()
 const route = useRoute()
@@ -111,7 +111,7 @@ const loadCurrentStock = async () => {
   if (values.product_id && values.branch_id) {
     try {
       const stocks = await stockStore.fetchStocksByBranch(values.branch_id)
-      currentStock.value = stocks.find(s => s.product_id === values.product_id)
+      currentStock.value = stocks?.find(s => s.product_id === values.product_id) || null
       
       // Load product details
       selectedProduct.value = await productStore.fetchProductById(values.product_id)
@@ -263,7 +263,7 @@ onMounted(async () => {
               v-for="type in movementTypes"
               :key="type.value"
               type="button"
-              @click="setValue('type', Stype.value)"
+              @click="setValue('type', type.value as StockMovementType)"
               :class="[
                 'p-4 border-2 rounded-lg transition-all hover:shadow-md',
                 values.type === type.value
@@ -354,7 +354,7 @@ onMounted(async () => {
         <AppCard v-if="selectedProduct && currentStock" title="Stock actuel">
           <div class="space-y-4">
             <div class="flex items-center gap-3 pb-4 border-b border-gray-200">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
                 <Package class="w-6 h-6 text-gray-400" />
               </div>
               <div>
@@ -404,7 +404,7 @@ onMounted(async () => {
 
             <div v-if="newStockLevel <= selectedProduct.alert_quantity" class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
               <div class="flex items-start gap-2">
-                <AlertTriangle class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                <AlertTriangle class="w-5 h-5 text-orange-600 shrink-0 mt-0.5" />
                 <div>
                   <p class="text-sm font-medium text-orange-900">Attention</p>
                   <p class="text-xs text-orange-700 mt-1">

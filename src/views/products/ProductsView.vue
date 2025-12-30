@@ -60,9 +60,8 @@ const columns = [
   { key: 'image', label: '', width: '60px' },
   { key: 'name', label: 'Produit', sortable: true },
   { key: 'sku', label: 'SKU', sortable: true },
-  { key: 'category', label: 'Catégorie', sortable: false },
+  // { key: 'category', label: 'Catégorie', sortable: false },
   { key: 'price', label: 'Prix', sortable: true, align: 'right' as const },
-  { key: 'stock', label: 'Stock', sortable: false, align: 'center' as const },
   { key: 'status', label: 'Statut', sortable: false, align: 'center' as const },
   { key: 'actions', label: 'Actions', width: '120px', align: 'right' as const },
 ]
@@ -437,13 +436,6 @@ onMounted(() => {
               <p v-if="row.cost_price" class="text-xs text-gray-500">
                 Coût: {{ formatCurrency(row.cost_price) }}
               </p>
-            </div>
-          </template>
-
-          <!-- Stock -->
-          <template #cell-stock="{ row }">
-            <div class="flex items-center justify-center gap-2">
-              <AppBadge variant="info" size="sm"> Stock suivi </AppBadge>
             </div>
           </template>
 

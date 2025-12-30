@@ -17,7 +17,7 @@ import {
 } from 'lucide-vue-next'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { formatCurrency } from '@utils'
+import { formatCurrency } from '@utils/formatters'
 import AppInput from '@/components/common/AppInput.vue'
 import AppTable from '@/components/common/AppTable.vue'
 import AppBadge from '@/components/common/AppBadge.vue'
@@ -44,7 +44,7 @@ const loading = ref(false)
 // Table columns
 const columns = [
   { key: 'product', label: 'Produit', sortable: true },
-  { key: 'branch', label: 'Branche', sortable: true },
+  // { key: 'branch', label: 'Branche', sortable: true },
   { key: 'quantity', label: 'Quantité', sortable: true, align: 'center' as const },
   { key: 'available', label: 'Disponible', sortable: false, align: 'center' as const },
   { key: 'reserved', label: 'Réservé', sortable: false, align: 'center' as const },
@@ -82,12 +82,12 @@ const quickStats = computed(() => {
 const fetchStoks = async () => {
   loading.value = true
   try {
-    const branchId = authStore.userBranchId
+    const branchId = authStore.userBranchId ?? undefined
     console.log('id',branchId)
     if (branchId) {
-      await stockStore.fetchStocksByBranch(branchId)
     }
-    await stockStore.fetchLowStocks(branchId || undefined)
+    await stockStore.fetchStocksByBranch()
+    // await stockStore.fetchLowStocks(branchId)
   } catch (error) {
     console.error('Error fetchinStock', error)
   } finally {
@@ -95,8 +95,8 @@ const fetchStoks = async () => {
   }
 }
 
-const handleSearch = (value: string) => {
-  searchQuery.value = value
+const handleSearch = (value: string|number) => {
+  searchQuery.value = value as string
 }
 
 const goToAdjustment = (stock?: Stock) => {
@@ -136,7 +136,7 @@ const handleExport = () => {
   console.log('Export stocks')
 }
 
-onMounted(() => fetchStoks())
+onMounted(() => {fetchStoks()})
 </script>
 <template>
   <div class="space-y-6">
@@ -155,11 +155,11 @@ onMounted(() => fetchStoks())
           <Download class="w-4 h-4 mr-4" />
           Exporter
         </AppButton>
-        <AppButton variant="success" size="sm" @click="goToAdjustment">
+        <AppButton variant="success" size="sm" @click="() => goToAdjustment()">
           <Plus class="w-5 h-5 mr-4" />
           Ajuster le stock
         </AppButton>
-        <AppButton variant="primary" size="sm" @click="goToTransfer">
+        <AppButton variant="primary" size="sm" @click="() => goToTransfer()">
           <ArrowLeft class="w-5 h-5 mr-4" />
           Transférer
         </AppButton>
@@ -340,7 +340,7 @@ onMounted(() => fetchStoks())
            <!-- Value -->
           <template #cell-value="{ row }">
             <span class="font-semibold text-gray-900">
-              {{ formatCurrency(row.quantity * row.product.selling_price) }}
+              {{ formatCurrency( Number(row.product.selling_price)) }}
             </span>
           </template>
 

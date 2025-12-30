@@ -9,6 +9,7 @@ import AppButton from '@components/common/AppButton.vue'
 import AppCard from '@components/common/AppCard.vue'
 import AppBadge from '@components/common/AppBadge.vue'
 import AppTable from '@components/common/AppTable.vue'
+import AppSpinner from '@/components/common/AppSpinner.vue'
 import {
   ArrowLeft,
   Edit,
@@ -109,7 +110,7 @@ onMounted(() => {
 
 <template>
   <div v-if="loading" class="flex items-center justify-center h-96">
-    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+    <AppSpinner text="Chargement en cours..."/>
   </div>
 
   <div v-else-if="company" class="space-y-6">

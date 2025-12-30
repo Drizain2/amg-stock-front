@@ -11,8 +11,9 @@ class StockService {
     /**
      * Liste tous les stocks d'une branche
      */
-    async getByBranch(brancId: number): Promise<Stock[]> {
-        const { data } = await apiClient.get<{ data: Stock[] }>(`${this.basePath}/branch/${brancId}`)
+    async getByBranch(branchId?: number): Promise<Stock[]> {
+        const url = branchId ? `/${branchId}`:''
+            const { data } = await apiClient.get<{ data: Stock[] }>(`${this.basePath}/branch${url}`)
         return data.data
     }
     /**

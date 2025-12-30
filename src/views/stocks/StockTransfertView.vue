@@ -7,7 +7,7 @@ import AppInput from '@/components/common/AppInput.vue'
 import { useForm } from '@/composables'
 import { useAuthStore, useBranchStore, useProductStore, useStockStore } from '@/stores'
 import { TransferStockRequest } from '@/types'
-import { AlertTriangle, ArrowLeft, Save, X,ArrowRightLeft, Building2 } from 'lucide-vue-next'
+import { AlertTriangle, ArrowLeft, Save, X,ArrowRightLeft, Building2,Package } from 'lucide-vue-next'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -117,7 +117,7 @@ const loadStockInfo = async () => {
       //Charger le stock de ce produit des branches
       if (values.from_branch_id) {
         const stocks = await stockStore.fetchStocksByBranch(values.from_branch_id)
-        sourceStock.value = stocks.find(s => s.product_id === values.product_id)
+        sourceStock.value = stocks?.find(s => s.product_id === values.product_id) || null
       }
     } catch (error) {
       console.error('Error fecthing stock info', error)

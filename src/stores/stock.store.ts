@@ -47,7 +47,7 @@ export const useStockStore = defineStore('stock', () => {
     })
 
     // Actions
-    const fetchStocksByBranch = async (branchId: number) => {
+    const fetchStocksByBranch = async (branchId?:number) => {
         try {
             isLoading.value = true
             const fetchedStocks = await stockService.getByBranch(branchId)
@@ -62,6 +62,7 @@ export const useStockStore = defineStore('stock', () => {
     }
 
     const fetchStocksByProduct = async (productId: number) => {
+        console.log('Fetching stocks for product ID:', productId)
         try {
             isLoading.value = true
             const response = await stockService.getByProduct(productId)
@@ -83,7 +84,7 @@ export const useStockStore = defineStore('stock', () => {
             movements.value.unshift(movement)
 
             // Rafraîchir les stocks de la branche
-            await fetchStocksByBranch(data.branch_id)
+            await fetchStocksByBranch()
 
             toast.success('Stock ajusté avec succès')
             return movement

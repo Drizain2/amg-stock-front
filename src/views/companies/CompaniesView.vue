@@ -8,7 +8,6 @@ import AppTable from '@/components/common/AppTable.vue'
 import { useDebounce, useFilters, usePagination, usePermissions } from '@/composables'
 import { useCompanyStore } from '@/stores'
 import { Company, CompanyFilters } from '@/types'
-import { formatDate } from '@/utils'
 import { Building2, Edit, Eye, Plus, Search, Trash2,Filter,RotateCcw } from 'lucide-vue-next'
 import { computed,onMounted,ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -373,7 +372,7 @@ onMounted(()=>{fetchCompanies()})
 
           <!-- Created -->
           <template #cell-created="{ row }">
-            <span class="text-sm text-gray-600">{{ formatDate(row.created_at) }}</span>
+            <span class="text-sm text-gray-600">{{ row.created_at }}</span>
           </template>
 
           <!-- Actions -->
