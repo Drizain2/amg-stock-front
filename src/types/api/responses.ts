@@ -229,6 +229,19 @@ export interface LowStockResponse {
     stocks: Stock[]
 }
 
+export interface CreateProductWithStockResponse {
+  message: string
+  product: Product
+  stocks: Array<{
+    id: number
+    branch_id: number
+    branch_name: string
+    quantity: number
+    available_quantity: number
+  }>
+  movements: StockMovement[]
+}
+
 // ============================================
 // STOCK MOVEMENT
 // ============================================

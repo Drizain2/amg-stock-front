@@ -1,4 +1,4 @@
-import { type ProductFilters, type PaginatedResponse, type Product, ProductResponse,  UpdateProductRequest, CreatedProductRequest } from "@/types"
+import { type ProductFilters, type PaginatedResponse, type Product, ProductResponse,  UpdateProductRequest, CreatedProductRequest, CreateProductWithStockRequest, CreateProductWithStockResponse } from "@/types"
 import { objectToQueryString } from "@/utils"
 import apiClient from "./axios.config"
 
@@ -34,6 +34,13 @@ class ProductService {
         return data.product
     }
 
+    /**
+     * Créer une produit avec stock initial
+     */
+    async createWithStock(productData: CreateProductWithStockRequest):Promise<CreateProductWithStockResponse>{
+        const {data} = await apiClient.post<CreateProductWithStockResponse>(`${this.basePath}/with-stock`, productData)
+        return data
+    }
     /**
      * Mettre à jour une produit
      */

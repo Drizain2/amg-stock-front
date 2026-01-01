@@ -5,6 +5,7 @@ import type {
     ProductFilters,
     CreatedProductRequest,
     UpdateProductRequest,
+    CreateProductWithStockResponse,
 } from '@/types'
 import { productService } from '@/services'
 import { useToast } from 'vue-toastification'
@@ -83,6 +84,27 @@ export const useProductStore = defineStore('product', () => {
             products.value.unshift(product)
             toast.success('Produit créé avec succès')
             return product
+        } catch (error) {
+            toast.error('Erreur lors de la création du produit')
+            throw error
+        } finally {
+            isLoading.value = false
+        }
+    }
+
+    const createProductWithStock = async(data:CreatedProductRequest):Promise<CreateProductWithStockResponse> => {
+        try {
+            isLoading.value = true
+            const response = await productService.createWithStock(data)
+            products.value.unshift(response.product)
+            // Message de succès détaillé
+            const branchCount = response.stocks.length
+            const totalQuantity = response.stocks.reduce((sum, s) => sum + s.quantity, 0)
+            
+            toast.success(
+                `Produit créé avec succès ! Stock initial: ${totalQuantity} unités réparties sur ${branchCount} branche${branchCount > 1 ? 's' : ''}`
+            )
+            return response
         } catch (error) {
             toast.error('Erreur lors de la création du produit')
             throw error
@@ -187,5 +209,6 @@ export const useProductStore = defineStore('product', () => {
         restoreProduct,
         clearCurrentProduct,
         reset,
+        createProductWithStock,
     }
 })

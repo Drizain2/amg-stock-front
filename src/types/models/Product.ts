@@ -1,4 +1,6 @@
 import { ProductUnit } from "../common/enums"
+import { StockMovement } from "./StockMovement"
+
 
 export interface Product {
     id: number
@@ -90,3 +92,43 @@ export interface ProductOption {
     unit: ProductUnit
     selling_price: number
 }
+
+export interface InitialStockData{
+    branch_id: number
+    quantity: number
+    unit_cost?: number
+    notes?:string
+}
+
+export interface CreateProductWithStockRequest{
+    // Product data
+  name: string
+  sku: string
+  description?: string | null
+  image?: string | null
+  cost_price: number
+  selling_price: number
+  tax_rate?: number
+  alert_quantity: number
+  unit?: ProductUnit
+  is_active?: boolean
+  track_stock?: boolean
+  company_id: number
+  category_id?: number | null
+  
+  // Initial stocks for branches
+  initial_stocks?: InitialStockData[]
+}
+
+export interface ProductWithStockResponse {
+  message: string
+  product: Product
+  stocks: Array<{
+    branch_id: number
+    branch_name: string
+    quantity: number
+    movement: StockMovement
+  }>
+}
+
+// src/types/api/responses.ts (ajout)

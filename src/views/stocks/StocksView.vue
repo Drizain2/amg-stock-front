@@ -48,7 +48,7 @@ const selectedBranchId = ref<number | null>(null)
 // Table columns
 const columns = [
   { key: 'product', label: 'Produit', sortable: true },
-  { key: 'branch', label: 'Branche', sortable: true },
+  // { key: 'branch', label: 'Branche', sortable: true },
   { key: 'quantity', label: 'Quantité', sortable: true, align: 'center' as const },
   { key: 'available', label: 'Disponible', sortable: false, align: 'center' as const },
   { key: 'reserved', label: 'Réservé', sortable: false, align: 'center' as const },
@@ -455,7 +455,7 @@ onMounted(async () => {
               <!-- Value -->
               <template #cell-value="{ row }">
                 <span class="font-semibold text-gray-900">
-                  {{ formatCurrency(row.quantity * Number(row.product.selling_price)) }}
+                  {{ formatCurrency( Number(row.product.selling_price)) }}
                 </span>
               </template>
 
