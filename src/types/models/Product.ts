@@ -46,6 +46,8 @@ export interface ProductFormData {
     is_active?: boolean
     tract_stock?: boolean
     company_id: number
+    branch_id: number
+    quantity: number
     category_id?: number | null
 }
 export interface CreatedProductRequest {
@@ -62,6 +64,8 @@ export interface CreatedProductRequest {
     tract_stock?: boolean
     company_id: number
     category_id?: number | null
+    branch_id: number
+    quantity: number
 }
 export interface UpdateProductRequest {
     name?: string

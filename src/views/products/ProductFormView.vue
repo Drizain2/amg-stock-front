@@ -44,11 +44,13 @@ const { values, setValue, errors, setErrors, isSubmitting, submit } = useForm<Pr
     name: '',
     sku: '',
     description: '',
+    branch_id: 0,
     image: '',
     cost_price: 0,
     selling_price: 0,
     tax_rate: 0,
     alert_quantity: 5,
+    quantity: 0,
     unit: ProductUnit.PIECE,
     is_active: true,
     tract_stock: true,
@@ -129,6 +131,7 @@ const handleSubmit = async () => {
       } else {
         const createData: CreatedProductRequest = {
           ...formValues,
+          branch_id: Number(route.query.branch_id),
           cost_price: Number(formValues.cost_price),
           company_id: companyStore.currentCompany?.id || 1,
         }
@@ -150,6 +153,8 @@ const handleCancel = () => {
 }
 
 onMounted(async()=>{
+  console.log("branche réçu",route.query.branch_id);
+  
   if(isEditMode.value){
     try{
       const product = await productStore.fetchProductById(Number(route.params.id))
@@ -379,7 +384,19 @@ onMounted(async()=>{
                   </span>
                 </label>
 
-                <!-- Alert Quantity -->
+                <!--  Quantity -->
+                <AppInput
+                :model-value="values.quantity"
+                  @update:model-value="setValue('quantity', Number($event))"
+                  label="Quantité"
+                  type="number"
+                  placeholder="5"
+                  :min="0"
+                  :error="errors.quantity"
+                  :disabled="isSubmitting"
+                  required
+                  />
+                  <!-- Alert Quantity
                 <AppInput
                   :model-value="values.alert_quantity"
                   @update:model-value="setValue('alert_quantity', Number($event))"
@@ -391,7 +408,7 @@ onMounted(async()=>{
                   :error="errors.alert_quantity"
                   :disabled="isSubmitting"
                   required
-                />
+                /> -->
               </div>
             </div>
           </AppCard>

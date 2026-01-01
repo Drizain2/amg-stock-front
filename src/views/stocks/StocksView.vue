@@ -358,7 +358,7 @@ onMounted(async () => {
           :stocks="stat.stocks"
           :can-adjust="canAdjust"
           @view-all="selectedBranchId = $event"
-          @adjust="router.push({ name: 'StockAdjust', query: { branch_id: $event } })"
+          @adjust="router.push({ name: 'ProductCreate', query: { branch_id: $event } })"
         />
       </div>
     </div>

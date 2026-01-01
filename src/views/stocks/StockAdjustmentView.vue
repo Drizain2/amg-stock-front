@@ -159,6 +159,7 @@ watch(() => [values.product_id, values.branch_id], () => {
 
 // Lifecycle
 onMounted(async () => {
+  console.log('branch reçu', route.query.branch_id);
   await Promise.all([fetchProducts(), fetchBranches()])
 
   // Pre-fill from query params
@@ -263,7 +264,7 @@ onMounted(async () => {
               v-for="type in movementTypes"
               :key="type.value"
               type="button"
-              @click="setValue('type', type.value as StockMovementType)"
+              @click="setValue('type', type.value)"
               :class="[
                 'p-4 border-2 rounded-lg transition-all hover:shadow-md',
                 values.type === type.value
