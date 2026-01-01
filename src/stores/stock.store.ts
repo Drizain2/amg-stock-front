@@ -16,6 +16,7 @@ export const useStockStore = defineStore('stock', () => {
     // State
     const stocks = ref<Stock[]>([])
     const movements = ref<StockMovement[]>([])
+    const stocksByBranch = ref<Map<number, Stock[]>>(new Map())
     const lowStocks = ref<Stock[]>([])
     const isLoading = ref(false)
     const pagination = ref({
@@ -46,6 +47,32 @@ export const useStockStore = defineStore('stock', () => {
         return (branchId: number) => stocks.value.filter(s => s.branch.id === branchId)
     })
 
+    const getAllBranchesStocks = computed(()=>{
+        const branchStocks: Array<{
+            branchId: number
+            stocks: Stock[]
+            branchName: string
+            branchCode:string
+            totalValue: number
+            lowStockCount: number
+        }>=[]
+        stocksByBranch.value.forEach((stocks, branchId)=>{
+            const branch=stocks[0]?.branch
+            if(branch){
+                const totalValue=stocks.reduce((sum,stock)=>sum + stock.quantity * (stock.product?.selling_price || 0),0)
+                const lowStockCount=stocks.filter(s=>s.is_low_stock).length
+                branchStocks.push({
+                    branchId: branch.id,
+                    stocks,
+                    branchName: branch.name,
+                    branchCode: branch.code,
+                    totalValue,
+                    lowStockCount
+                })
+            }
+        })
+        return branchStocks
+    })
     // Actions
     const fetchStocksByBranch = async (branchId?:number) => {
         try {
@@ -55,6 +82,36 @@ export const useStockStore = defineStore('stock', () => {
             return fetchedStocks
         } catch (error) {
             console.error('Erreur lors du chargement des stocks:', error)
+            throw error
+        } finally {
+            isLoading.value = false
+        }
+    }
+
+    const fetchAllCompanyStocks = async (branches:Array<{id:number}>)=>{
+       try{
+        isLoading.value=true
+        stocksByBranch.value.clear()
+
+        const promises =branches.map(branch=>stockService.getByBranch(branch.id).then(stocks=>{
+            stocksByBranch.value.set(branch.id,stocks)
+            return stocks
+        }).catch(error=>{
+            console.error(`Erreur lors du chargement des stocks pour la branche ID ${branch.id}:`, error)
+            return []
+        }))
+        await Promise.all(promises)
+
+        // consolider tous les stocks
+        const allStocks:Stock[]=[]
+        stocksByBranch.value.forEach(stocks=>{
+            allStocks.push(...stocks)
+        })
+        stocks.value=allStocks
+        return allStocks
+       }
+       catch (error) {
+            console.error('Erreur lors du chargement des stocks de toutes les branches:', error)
             throw error
         } finally {
             isLoading.value = false
@@ -172,6 +229,7 @@ export const useStockStore = defineStore('stock', () => {
         lowStocks,
         isLoading,
         pagination,
+        stocksByBranch,
 
         // Getters
         hasStocks,
@@ -180,6 +238,7 @@ export const useStockStore = defineStore('stock', () => {
         totalStockValue,
         getStockByProduct,
         getStockByBranch,
+        getAllBranchesStocks,
 
         // Actions
         fetchStocksByBranch,
@@ -189,5 +248,6 @@ export const useStockStore = defineStore('stock', () => {
         fetchMovements,
         fetchLowStocks,
         reset,
+        fetchAllCompanyStocks,
     }
 })
